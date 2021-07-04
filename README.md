@@ -4,7 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4100/`. The app will automatically reload if you change any of the source files.
+Take clone from `https://github.com/sumant1512/shopBridge` using `git clone https://github.com/sumant1512/shopBridge.git`
+
+After taking clone go to project folder and run `npm install` to install all the required package.
+
+Then Run `ng serve` for a dev server. Navigate to `http://localhost:4100/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
