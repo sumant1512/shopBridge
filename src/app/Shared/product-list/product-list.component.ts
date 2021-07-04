@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { CategoryFacade } from "src/app/Store/category/category.facade";
 import { ProductListType } from "src/app/Store/products/interfaces/product-list.interface";
 import { ProductFacade } from "src/app/Store/products/product.facade";
+import { AppConfigurations } from "src/assets/config";
 import { ButtonEnum } from "../button/button.enum";
 
 @Component({
@@ -16,6 +17,11 @@ export class ProductListComponent implements OnInit {
   @Output() updateProductData = new EventEmitter<ProductListType>();
   @Output() deleteProductData = new EventEmitter<number>();
   @Output() viewProductData = new EventEmitter<number>();
+
+  isSearchFilterActive = AppConfigurations.featureFlags.isSearchFilterActive;
+  isUpdateProductActive = AppConfigurations.featureFlags.isUpdateProductActive
+  isDeleteProductActive = AppConfigurations.featureFlags.isDeleteProductActive
+  isViewProductDetailsActive = AppConfigurations.featureFlags.isViewProductDetailsActive
 
   buttonEnum = ButtonEnum;
   searchCategory: string;
