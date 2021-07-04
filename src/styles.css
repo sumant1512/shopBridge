@@ -1,0 +1,37 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0-modified | 20110126
+   License: none (public domain)
+*/
+
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+html,
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.topLine {
+  border-top: 3px solid #673ab7;
+  border-radius: 6px !important;
+}
+
+.toolbarHeight {
+  height: 50px !important;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+.h-10-vh {
+  height: 10vh;
+}
+
+.h-90-vh {
+  height: 90vh;
+}
+
+.dark-primary {
+  color: #3e0f92;
+}

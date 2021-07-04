@@ -1,0 +1,148 @@
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Search Here*</mat-label>
+        <input
+          [(ngModel)]="searchedValue"
+          matInput
+          placeholder="Search Here*"
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Select Category*</mat-label>
+        <mat-select
+          [(ngModel)]="searchCategory"
+          (ngModelChange)="getProductsForSelectedCategory()"
+          name="category"
+        >
+          <mat-option value="all"> All </mat-option>
+          <mat-option *ngFor="let category of categoryList" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div *ngIf="productList.length; else loading" class="row">
+    <div
+      *ngFor="let product of productList | searchProduct: searchedValue"
+      class="my-4 col-12 col-md-6 col-lg-4"
+    >
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img class="header-image" [src]="product.image" alt="" />
+          </div>
+          <mat-card-title>{{ product.title }}</mat-card-title>
+        </mat-card-header>
+        <img
+          class="product-image p-5"
+          mat-card-image
+          [src]="product.image"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <p>
+            {{ product.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="text-right">
+          <button mat-button>₹ {{ product.price }}</button>
+        </mat-card-actions>
+        <mat-card-actions>
+          <div class="row">
+            <div class="col-6">
+              <app-button
+                [buttonLabel]="'EDIT'"
+                [buttonType]="buttonEnum.Primary"
+                (buttonClicked)="updateProduct(product)"
+              ></app-button>
+            </div>
+
+            <div class="col-6">
+              <app-button
+                [buttonLabel]="'DELETE'"
+                [buttonType]="buttonEnum.Warn"
+                (buttonClicked)="deleteProduct(product.id)"
+              ></app-button>
+            </div>
+          </div>
+        </mat-card-actions>
+        <mat-card-actions>
+          <div class="row">
+            <div class="col-6">
+              <app-button
+                [buttonLabel]="'VIEW'"
+                [buttonType]="buttonEnum.Primary"
+                (buttonClicked)="viewProduct(product.id)"
+              ></app-button>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="row">
+      <div
+        *ngFor="let product of productList.constructor(3)"
+        class="my-4 col-12 col-md-6 col-lg-4"
+      >
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar>
+              <app-loading-skeleton
+                Cwidth="50"
+                Cheight="50"
+                circle="true"
+              ></app-loading-skeleton>
+            </div>
+            <mat-card-title
+              ><app-loading-skeleton
+                Cwidth="265"
+                Cheight="50"
+              ></app-loading-skeleton
+            ></mat-card-title>
+          </mat-card-header>
+          <app-loading-skeleton Cheight="250"></app-loading-skeleton>
+          <mat-card-content>
+            <p>
+              <app-loading-skeleton Cheight="60"></app-loading-skeleton>
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="text-right">
+            <button class="px-2" mat-button>
+              <app-loading-skeleton
+                Cwidth="70"
+                Cheight="24"
+              ></app-loading-skeleton>
+            </button>
+          </mat-card-actions>
+          <mat-card-actions>
+            <div class="row">
+              <div class="col-6">
+                <app-loading-skeleton Cheight="60"></app-loading-skeleton>
+              </div>
+
+              <div class="col-6">
+                <app-loading-skeleton Cheight="60"></app-loading-skeleton>
+              </div>
+            </div>
+          </mat-card-actions>
+          <mat-card-actions>
+            <div class="row">
+              <div class="col-6">
+                <app-loading-skeleton Cheight="60"></app-loading-skeleton>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </ng-template>
+</div>

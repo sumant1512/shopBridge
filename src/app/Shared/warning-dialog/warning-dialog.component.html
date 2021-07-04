@@ -1,0 +1,23 @@
+<div class="text-center">
+  <div class="mb-5">
+    <h3>Are you sure you want to delete {{ data?.name }} ?</h3>
+  </div>
+
+  <div>
+    <button
+      class="mb-3"
+      mat-button
+      mat-raised-button
+      color="warn"
+      [mat-dialog-close]="data?.id"
+      cdkFocusInitial
+    >
+      Ok
+    </button>
+  </div>
+  <div>
+    <button mat-button mat-raised-button color="primary" (click)="onNoClick()">
+      No Thanks
+    </button>
+  </div>
+</div>
