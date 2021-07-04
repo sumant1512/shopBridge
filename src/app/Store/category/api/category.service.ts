@@ -3,19 +3,22 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { SnackbarService } from "src/app/Shared/Services/snackbar.service";
+import { AppConfigurations } from "src/assets/config";
+import { ApiType } from "src/assets/config.type";
 
 @Injectable({
   providedIn: "root",
 })
 export class CategoryService {
+  apiUrls: ApiType = AppConfigurations.api;
+  
   constructor(
     private http: HttpClient,
     private snackbarServices: SnackbarService
   ) {}
 
   getCategories(): Observable<string[]> {
-    const getCategoriesUrl = "https://fakestoreapi.com/products/categories";
-    return this.http.get<any>(getCategoriesUrl).pipe(
+    return this.http.get<any>(this.apiUrls.getCategoryListUrl).pipe(
       map((response) => {
         if (response) {
           return response;

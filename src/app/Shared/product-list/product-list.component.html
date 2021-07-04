@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row mt-3">
+  <div *ngIf = "isSearchFilterActive" class="row mt-3">
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Search Here*</mat-label>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div *ngIf="productList.length; else loading" class="row">
+  <div *ngIf="productList.length; else loader" class="row">
     <div
       *ngFor="let product of productList | searchProduct: searchedValue"
       class="my-4 col-12 col-md-6 col-lg-4"
@@ -55,7 +55,7 @@
         </mat-card-actions>
         <mat-card-actions>
           <div class="row">
-            <div class="col-6">
+            <div *ngIf = "isUpdateProductActive" class="col-6">
               <app-button
                 [buttonLabel]="'EDIT'"
                 [buttonType]="buttonEnum.Primary"
@@ -63,7 +63,7 @@
               ></app-button>
             </div>
 
-            <div class="col-6">
+            <div *ngIf = "isDeleteProductActive" class="col-6">
               <app-button
                 [buttonLabel]="'DELETE'"
                 [buttonType]="buttonEnum.Warn"
@@ -74,7 +74,7 @@
         </mat-card-actions>
         <mat-card-actions>
           <div class="row">
-            <div class="col-6">
+            <div *ngIf = "isViewProductDetailsActive" class="col-6">
               <app-button
                 [buttonLabel]="'VIEW'"
                 [buttonType]="buttonEnum.Primary"
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <ng-template #loading>
+  <ng-template #loader>
     <div class="row">
       <div
         *ngFor="let product of productList.constructor(3)"
@@ -104,7 +104,7 @@
             </div>
             <mat-card-title
               ><app-loading-skeleton
-                Cwidth="265"
+                Cwidth="355"
                 Cheight="50"
               ></app-loading-skeleton
             ></mat-card-title>

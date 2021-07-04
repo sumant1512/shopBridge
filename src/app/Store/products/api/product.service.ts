@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { SnackbarService } from "src/app/Shared/Services/snackbar.service";
+import { AppConfigurations } from "src/assets/config";
+import { ApiType } from "src/assets/config.type";
 import { AddProductType } from "../interfaces/add-product.interface";
 import { ProductListType } from "../interfaces/product-list.interface";
 
@@ -10,14 +12,14 @@ import { ProductListType } from "../interfaces/product-list.interface";
   providedIn: "root",
 })
 export class ProductService {
+  apiUrls: ApiType = AppConfigurations.api;
   constructor(
     private http: HttpClient,
     private snackbarService: SnackbarService
   ) {}
 
   addProduct(productDetails: AddProductType): Observable<any> {
-    const addProductUrl = "https://fakestoreapi.com/products";
-    return this.http.post<any>(addProductUrl, productDetails).pipe(
+    return this.http.post<any>(this.apiUrls.addProductUrl, productDetails).pipe(
       map((response) => {
         if (response) {
           this.snackbarService.openSnackBar("Product Added Successully");
@@ -32,8 +34,7 @@ export class ProductService {
   }
 
   fetchProducts(): Observable<any> {
-    const fetchProductsUrl = "https://fakestoreapi.com/products";
-    return this.http.get<any>(fetchProductsUrl).pipe(
+    return this.http.get<any>(this.apiUrls.getProductListUrl).pipe(
       map((response) => {
         if (response) {
           return response;
@@ -47,10 +48,8 @@ export class ProductService {
   }
 
   updateProduct(productDetails: ProductListType): Observable<any> {
-    const deleteProductUrl =
-      "https://fakestoreapi.com/products/" + productDetails.id;
     return this.http
-      .put<any>(deleteProductUrl, {
+      .put<any>(this.apiUrls.updateProductUrl+productDetails.id, {
         title: productDetails.title,
         price: productDetails.price,
         description: productDetails.description,
@@ -72,8 +71,7 @@ export class ProductService {
   }
 
   deleteProduct(productId: number): Observable<any> {
-    const deleteProductUrl = "https://fakestoreapi.com/products/" + productId;
-    return this.http.delete<any>(deleteProductUrl).pipe(
+    return this.http.delete<any>(this.apiUrls.deleteProductUrl+productId).pipe(
       map((response) => {
         if (response) {
           this.snackbarService.openSnackBar("Product Deleted");
