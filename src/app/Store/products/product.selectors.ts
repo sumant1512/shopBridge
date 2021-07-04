@@ -1,5 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
+import { ProductListType } from "./interfaces/product-list.interface";
 
 export const products = (state: AppState) => state.Products;
 
@@ -12,6 +13,17 @@ export const getProductsForSelectedCategory = createSelector(
       } else {
         return state.filter((product) => product.category === selectedCategory);
       }
+    }
+  }
+);
+
+export const getProductsDetailsForSelectedProduct = createSelector(
+  products,
+  (state: ProductListType[], productId: string) => {
+    if (state) {
+      console.log(state);
+      console.log(productId);
+      return state.filter((product) => product.id === parseInt(productId));
     }
   }
 );

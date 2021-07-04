@@ -27,6 +27,17 @@ export class ProductFacade {
     );
   }
 
+  getProductsDetailsForSelectedProduct(
+    selectedProduct: string
+  ): Observable<ProductListType[]> {
+    return this.store.pipe(
+      select(
+        productSelector.getProductsDetailsForSelectedProduct,
+        selectedProduct
+      )
+    );
+  }
+
   addProduct(productDetails: AddProductType) {
     this.store.dispatch(new AddProduct(productDetails));
   }
